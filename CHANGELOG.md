@@ -2,6 +2,30 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.7.0] — 2026-04-10
+
+### Added
+
+**Primitives**
+
+- `Section` — semantic `<section>` element. Native: `@expo/html-elements` `Section` with `cssInterop`. Web: renders `<section>` HTML tag. Props: `ViewProps` + `className`.
+- `Nav` — semantic `<nav>` element. Native: `@expo/html-elements` `Nav` with `cssInterop`. Web: renders `<nav>` HTML tag. Props: `ViewProps` + `className`.
+- `Footer` — semantic `<footer>` element. Native: `@expo/html-elements` `Footer` with `cssInterop`. Web: renders `<footer>` HTML tag. Props: `ViewProps` + `className`.
+- `Main` — semantic `<main>` element. Native: `@expo/html-elements` `Main` with `cssInterop`. Web: renders `<main>` HTML tag. Props: `ViewProps` + `className`.
+- `Anchor` — pressable link. Native: `Pressable` that calls `Linking.openURL(href)`. Web: renders `<a>` tag. Props: `PressableProps` + `href?`, `className`.
+
+All five are exported from `@drakkar.software/seahorse/primitives`.
+
+**Components**
+
+- `FeatureCard` — icon + title + description card with optional CTA. Follows the `IconCard`/`StatCard` pattern. Props: `icon` (ReactNode), `title`, `description`, `ctaLabel?`, `onCtaPress?`, `className?`. Exported from `@drakkar.software/seahorse/components`.
+
+**Utilities**
+
+- `usePageMeta(meta: PageMeta)` — sets per-page SEO meta tags on web (no-op on native). Manages `document.title`, `<meta name="description">`, Open Graph (`og:title`, `og:description`, `og:type`, `og:image`), Twitter Card tags, `<link rel="canonical">`, and `hreflang` alternate links. Exported from `@drakkar.software/seahorse/utils/use-page-meta`.
+
+---
+
 ## [0.6.1] — 2026-04-10
 
 ### Fixed

@@ -207,6 +207,11 @@ import { Box, Text, Button, FlashList, ImageBackground } from "@drakkar.software
 |---|---|
 | `FlashList` | High-performance list wrapping `@legendapp/list`. Accepts `FlatListProps<T>` + `estimatedItemSize`. Requires `@legendapp/list` peer. |
 | `ImageBackground` | Platform-split image background. Native: RN `ImageBackground` with `className`. Web: `div` with CSS `backgroundImage`. Props: `source`, `className`, `style`. |
+| `Section` | Semantic `<section>` element. Native: `@expo/html-elements` with `cssInterop`. Web: real `<section>` tag. Props: `ViewProps` + `className`. |
+| `Nav` | Semantic `<nav>` element. Native: `@expo/html-elements` with `cssInterop`. Web: real `<nav>` tag. Props: `ViewProps` + `className`. |
+| `Footer` | Semantic `<footer>` element. Native: `@expo/html-elements` with `cssInterop`. Web: real `<footer>` tag. Props: `ViewProps` + `className`. |
+| `Main` | Semantic `<main>` element. Native: `@expo/html-elements` with `cssInterop`. Web: real `<main>` tag. Props: `ViewProps` + `className`. |
+| `Anchor` | Pressable link. Native: `Pressable` + `Linking.openURL(href)`. Web: real `<a>` tag. Props: `PressableProps` + `href?`, `className`. |
 
 ---
 
@@ -254,6 +259,7 @@ Source is organized into four subfolders — the public API is unchanged:
 | `ToggleCard` | Settings toggle card with custom switch |
 | `BackButton` | Ghost button with left arrow icon. Props: `text`, `onPress`, optional `className` |
 | `PinPad` | PIN dot indicators + number grid (used by `LockScreen`/`PinSetup`, also standalone) |
+| `FeatureCard` | Icon + title + description card with optional CTA. Props: `icon` (ReactNode), `title`, `description`, `ctaLabel?`, `onCtaPress?`, `className?` |
 
 ### Form components (`FormSection`)
 
@@ -362,6 +368,22 @@ import { parseLinks, serializeLinks, isValidUrl } from "@drakkar.software/seahor
 ```
 
 Parse/serialize URL arrays stored as a single JSON string field.
+
+### `use-page-meta`
+
+```ts
+import { usePageMeta } from "@drakkar.software/seahorse/utils/use-page-meta";
+
+usePageMeta({
+  title: "My Page",
+  description: "Page description for SEO",
+  canonical: "https://example.com/my-page",
+  ogImage: "https://example.com/og.png",
+  hreflang: [{ lang: "fr", href: "https://example.com/fr/my-page" }],
+});
+```
+
+Sets per-page SEO meta tags on web (no-op on native). Manages `document.title`, `<meta name="description">`, Open Graph tags (`og:title`, `og:description`, `og:type`, `og:image`), Twitter Card tags, `<link rel="canonical">`, and `hreflang` alternate links.
 
 ---
 
