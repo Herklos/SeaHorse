@@ -8,3 +8,4 @@ export { parseLinks, serializeLinks, isValidUrl } from "./links";
 export { exportToPdf, exportToCsv, exportJsonWeb, exportJsonNative, importJsonWeb, importJsonNative } from "./file-export";
 export { safeFormat } from "./date";
 export { useAutoOtaUpdate } from "./ota-update";
+export { usePageMeta } from "./use-page-meta";

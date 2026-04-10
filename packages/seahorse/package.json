@@ -1,6 +1,6 @@
 {
   "name": "@drakkar.software/seahorse",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Drakkar-Software/seahorse.git"
@@ -92,6 +92,10 @@
     "./utils/use-debounce": {
       "types": "./dist/utils/use-debounce.d.ts",
       "import": "./dist/utils/use-debounce.js"
+    },
+    "./utils/use-page-meta": {
+      "types": "./dist/utils/use-page-meta.d.ts",
+      "import": "./dist/utils/use-page-meta.js"
     },
     "./primitives": {
       "types": "./dist/primitives/index.d.ts",

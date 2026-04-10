@@ -19,6 +19,7 @@ export { TimelineItem } from "./ui/TimelineItem";
 export { StatusSelector } from "./ui/StatusSelector";
 export { ToggleCard } from "./ui/ToggleCard";
 export { DeadlineChip } from "./ui/DeadlineChip";
+export { FeatureCard } from "./ui/FeatureCard";
 
 // Sheets & modals
 export { ConfirmSheet } from "./sheets/ConfirmSheet";

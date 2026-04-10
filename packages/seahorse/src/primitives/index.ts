@@ -41,3 +41,10 @@ export * from './card'
 export * from './notification-dot'
 export * from './toast'
 export * from './image-background'
+
+// Semantic HTML layout
+export * from './section'
+export * from './nav'
+export * from './footer'
+export * from './main'
+export * from './anchor'
