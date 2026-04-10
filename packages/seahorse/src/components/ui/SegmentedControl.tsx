@@ -12,7 +12,7 @@ interface SegmentedControlProps {
   onSelect: (key: string) => void;
 }
 
-export function SegmentedControl({ segments, activeKey, onSelect }: SegmentedControlProps) {
+export function SegmentedControl({ segments = [], activeKey, onSelect }: SegmentedControlProps) {
   return (
     <View className="px-4 pt-3 pb-2 bg-background-0 border-b border-outline-100">
       <View className="flex-row bg-background-900 rounded-xl p-1">
