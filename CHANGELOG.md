@@ -2,6 +2,35 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.3.0] — 2026-04-10
+
+### Added
+
+- **`PinPad`** component — shared PIN dot indicators + number grid, extracted from `LockScreen` and `PinSetup`. Exported from `@drakkar.software/seahorse/components`. Accepts `onBiometric?` for optional biometric button in the bottom-left key slot.
+- **`handlePinDigit(currentPin, digit, pinLength)`** — pure helper that appends a digit and returns `{ nextPin, isComplete }`. Exported from both the root barrel and `./components`.
+- **`handlePinDelete(currentPin)`** — pure helper that removes the last PIN character. Exported from both the root barrel and `./components`.
+- **`PinDigitResult`** — TypeScript type for the return value of `handlePinDigit`.
+
+### Changed
+
+- **Component folder structure** — source reorganized into semantic subfolders. Public API is unchanged; all components still available from `@drakkar.software/seahorse/components`.
+  - `components/ui/` — 19 low-level UI primitives (StatusBadge, FilterTabs, FAB, ProgressBar, etc.)
+  - `components/pin/` — PIN authentication (PinPad, LockScreen, PinSetup)
+  - `components/sheets/` — bottom-sheet modals (ConfirmSheet, RenameSheet, DatePickerModal, TimePickerModal)
+  - `components/form/` — form building blocks (FormSection and its named exports)
+- **`LockScreen`** and **`PinSetup`** now delegate PIN dots + number grid rendering to `PinPad`. No API change.
+- **`HorizontalChipSelect`** is now a thin wrapper over `FilterTabs` — same `options/activeKey/onSelect/className` API, no behavior change.
+- **`ConfirmSheet`**, **`RenameSheet`**, **`DatePickerModal`**, **`TimePickerModal`** — internal refactor: `renderBackdrop` callback and present/dismiss lifecycle extracted into shared `useBottomSheetModal` hook. No API change.
+
+### Internal
+
+- Added `src/utils/pin-helpers.ts` for pure PIN logic (no React dependency — directly testable).
+- Added `src/components/sheets/useBottomSheetModal.tsx` — internal hook, not part of public API.
+- 10 new tests in `tests/pin-pad.test.ts` covering all `handlePinDigit` and `handlePinDelete` branches.
+- Fixed example app prop bugs: `FilterTabs` `onPress→onSelect`, `StatusSelector` `statuses/value/onChange→options/activeKey/onSelect`, `ConfirmSheet` `onClose→onCancel`.
+
+---
+
 ## [0.2.0] — 2026-04-10
 
 > **Breaking**: Requires NativeWind v5 + Tailwind CSS v4. Minimum React 19, React Native 0.83.

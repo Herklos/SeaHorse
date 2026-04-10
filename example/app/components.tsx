@@ -20,13 +20,14 @@ import {
   ToggleCard,
   ConfirmSheet,
   DeadlineChip,
+  HorizontalChipSelect,
 } from "@drakkar.software/seahorse/components";
 import { Star, Package, Users } from "lucide-react-native";
 
 const STATUSES = [
-  { value: "pending", label: "Pending", color: "#F59E0B" },
-  { value: "confirmed", label: "Confirmed", color: "#10B981" },
-  { value: "cancelled", label: "Cancelled", color: "#EF4444" },
+  { key: "pending", label: "Pending", color: "#F59E0B" },
+  { key: "confirmed", label: "Confirmed", color: "#10B981" },
+  { key: "cancelled", label: "Cancelled", color: "#EF4444" },
 ];
 
 const FILTER_TABS = [
@@ -35,9 +36,16 @@ const FILTER_TABS = [
   { key: "done", label: "Done" },
 ];
 
+const CHIP_OPTIONS = [
+  { key: "week", label: "This week" },
+  { key: "month", label: "This month" },
+  { key: "year", label: "This year" },
+];
+
 export default function ComponentsScreen() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
+  const [chip, setChip] = useState("week");
   const [segment, setSegment] = useState("list");
   const [rating, setRating] = useState(3);
   const [status, setStatus] = useState("pending");
@@ -53,7 +61,8 @@ export default function ComponentsScreen() {
         <View className="gap-2">
           <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Search & Filter</Text>
           <SearchBar value={search} onChangeText={setSearch} placeholder="Search items…" />
-          <FilterTabs tabs={FILTER_TABS} activeKey={filter} onPress={setFilter} />
+          <FilterTabs tabs={FILTER_TABS} activeKey={filter} onSelect={setFilter} />
+          <HorizontalChipSelect options={CHIP_OPTIONS} activeKey={chip} onSelect={setChip} />
           <SegmentedControl
             options={[{ value: "list", label: "List" }, { value: "grid", label: "Grid" }]}
             value={segment}
@@ -69,7 +78,7 @@ export default function ComponentsScreen() {
             <StatusBadge label="Cancelled" color="#EF4444" />
             <DeadlineChip date={nextWeek} />
           </View>
-          <StatusSelector statuses={STATUSES} value={status} onChange={setStatus} />
+          <StatusSelector options={STATUSES} activeKey={status} onSelect={setStatus} />
         </View>
 
         <View className="gap-2">
@@ -141,12 +150,13 @@ export default function ComponentsScreen() {
 
       <ConfirmSheet
         visible={showConfirm}
-        onClose={() => setShowConfirm(false)}
+        onCancel={() => setShowConfirm(false)}
         onConfirm={() => { setShowConfirm(false); Alert.alert("Deleted!"); }}
         title="Delete item?"
         message="This action cannot be undone."
         confirmLabel="Delete"
         cancelLabel="Cancel"
+        destructive
       />
     </SafeAreaView>
   );

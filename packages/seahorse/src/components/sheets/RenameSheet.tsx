@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
-import { BottomSheetModal, BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import { useBottomSheetModal } from "./useBottomSheetModal";
 
 interface RenameSheetProps {
   visible: boolean;
@@ -23,24 +24,12 @@ export function RenameSheet({
   onConfirm,
   onCancel,
 }: RenameSheetProps) {
-  const ref = useRef<BottomSheetModal>(null);
+  const { ref, renderBackdrop } = useBottomSheetModal(visible);
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    if (visible) {
-      setValue(initialValue);
-      ref.current?.present();
-    } else {
-      ref.current?.dismiss();
-    }
+    if (visible) setValue(initialValue);
   }, [visible, initialValue]);
-
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior="close" />
-    ),
-    []
-  );
 
   const handleConfirm = useCallback(() => {
     if (value.trim()) onConfirm(value.trim());

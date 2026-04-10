@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
-import { Lock, Delete, X } from "lucide-react-native";
-import { savePin, setLockEnabled } from "../utils/app-lock";
-import { useForgeTheme } from "../theme/context";
+import { Lock, X } from "lucide-react-native";
+import { savePin, setLockEnabled } from "../../utils/app-lock";
+import { useForgeTheme } from "../../theme/context";
+import { PinPad } from "./PinPad";
+import { handlePinDigit, handlePinDelete } from "../../utils/pin-helpers";
 
 const DEFAULT_PIN_LENGTH = 4;
 
@@ -52,17 +54,16 @@ export function PinSetup({
 
   const handleDigit = useCallback(
     (digit: string) => {
-      if (pin.length >= pinLength) return;
-      const next = pin + digit;
+      const { nextPin, isComplete } = handlePinDigit(pin, digit, pinLength);
       setError(false);
-      if (next.length === pinLength) {
+      if (isComplete) {
         if (step === "create") {
-          setFirstPin(next);
+          setFirstPin(nextPin);
           setPin("");
           setStep("confirm");
         } else {
-          if (next === firstPin) {
-            savePin(next).then(() =>
+          if (nextPin === firstPin) {
+            savePin(nextPin).then(() =>
               setLockEnabled(true).then(() => {
                 reset();
                 onComplete();
@@ -74,14 +75,14 @@ export function PinSetup({
           }
         }
       } else {
-        setPin(next);
+        setPin(nextPin);
       }
     },
     [pin, step, firstPin, onComplete, reset, pinLength]
   );
 
   const handleDelete = useCallback(() => {
-    setPin((p) => p.slice(0, -1));
+    setPin((p) => handlePinDelete(p));
     setError(false);
   }, []);
 
@@ -110,65 +111,15 @@ export function PinSetup({
           {step === "create" ? createSubtitle : confirmSubtitle}
         </Text>
 
-        {/* PIN dots */}
-        <View className="flex-row gap-4 mb-8">
-          {Array.from({ length: pinLength }).map((_, i) => (
-            <View
-              key={i}
-              className={`w-4 h-4 rounded-full ${
-                error
-                  ? "bg-error-500"
-                  : i < pin.length
-                    ? "bg-primary-500"
-                    : "bg-outline-200"
-              }`}
-            />
-          ))}
-        </View>
+        <PinPad
+          pin={pin}
+          pinLength={pinLength}
+          error={error}
+          onDigit={handleDigit}
+          onDelete={handleDelete}
+        />
 
-        {error && <Text className="text-sm text-error-500 mb-4">{mismatchError}</Text>}
-
-        {/* Number pad */}
-        <View className="w-full max-w-xs">
-          {[
-            ["1", "2", "3"],
-            ["4", "5", "6"],
-            ["7", "8", "9"],
-            ["", "0", "del"],
-          ].map((row, ri) => (
-            <View key={ri} className="flex-row justify-center gap-6 mb-4">
-              {row.map((key) => {
-                if (key === "") {
-                  return <View key="empty" style={{ width: 72, height: 72 }} />;
-                }
-                if (key === "del") {
-                  return (
-                    <Pressable
-                      key="del"
-                      onPress={handleDelete}
-                      className="items-center justify-center"
-                      style={{ width: 72, height: 72 }}
-                    >
-                      <Delete size={24} className="text-typography-400" />
-                    </Pressable>
-                  );
-                }
-                return (
-                  <Pressable
-                    key={key}
-                    onPress={() => handleDigit(key)}
-                    className="rounded-full bg-background-0 border border-outline-100 items-center justify-center active:bg-background-900"
-                    style={{ width: 72, height: 72 }}
-                  >
-                    <Text className="text-2xl font-medium text-typography-900">
-                      {key}
-                    </Text>
-                  </Pressable>
-                );
-              })}
-            </View>
-          ))}
-        </View>
+        {error && <Text className="text-sm text-error-500 mt-2">{mismatchError}</Text>}
       </View>
     </Modal>
   );

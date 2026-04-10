@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { View, Text, Pressable } from "react-native";
 import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import {
@@ -17,7 +17,8 @@ import {
 } from "date-fns";
 import { enUS } from "date-fns/locale";
 import type { Locale } from "date-fns";
-import { BottomSheetModal, BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import { useBottomSheetModal } from "./useBottomSheetModal";
 
 interface DatePickerModalProps {
   visible: boolean;
@@ -41,18 +42,13 @@ export function DatePickerModal({
   todayLabel = "Today",
   clearLabel = "Clear",
 }: DatePickerModalProps) {
-  const ref = useRef<BottomSheetModal>(null);
+  const { ref, renderBackdrop } = useBottomSheetModal(visible);
 
   const selectedDate = value ? parseISO(value) : null;
   const [displayMonth, setDisplayMonth] = useState(selectedDate ?? new Date());
 
   useEffect(() => {
-    if (visible) {
-      setDisplayMonth(selectedDate ?? new Date());
-      ref.current?.present();
-    } else {
-      ref.current?.dismiss();
-    }
+    if (visible) setDisplayMonth(selectedDate ?? new Date());
   }, [visible]);
 
   const weeks = useMemo(() => {
@@ -94,13 +90,6 @@ export function DatePickerModal({
     onClear();
     onClose();
   };
-
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior="close" />
-    ),
-    []
-  );
 
   return (
     <BottomSheetModal

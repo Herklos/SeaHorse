@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { BottomSheetModal, BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import { useBottomSheetModal } from "./useBottomSheetModal";
 
 interface ConfirmSheetProps {
   visible: boolean;
@@ -23,22 +24,7 @@ export function ConfirmSheet({
   onConfirm,
   onCancel,
 }: ConfirmSheetProps) {
-  const ref = useRef<BottomSheetModal>(null);
-
-  useEffect(() => {
-    if (visible) {
-      ref.current?.present();
-    } else {
-      ref.current?.dismiss();
-    }
-  }, [visible]);
-
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior="close" />
-    ),
-    []
-  );
+  const { ref, renderBackdrop } = useBottomSheetModal(visible);
 
   return (
     <BottomSheetModal

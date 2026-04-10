@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable } from "react-native";
-import { useForgeTheme } from "../theme/context";
+import { useForgeTheme } from "../../theme/context";
 
 interface ToggleCardProps {
   icon: React.ReactNode;

@@ -6,7 +6,7 @@
 
 Generic UI components and utilities for React Native / Expo apps.
 
-**26 components** · **10 utility modules** · **Zero domain coupling** · **NativeWind v5 + Tailwind CSS v4**
+**27 components** · **10 utility modules** · **Zero domain coupling** · **NativeWind v5 + Tailwind CSS v4**
 
 ---
 
@@ -85,6 +85,15 @@ import {
 } from "@drakkar.software/seahorse/components";
 ```
 
+Source is organized into four subfolders — the public API is unchanged:
+
+| Folder | Contents |
+|---|---|
+| `components/ui/` | Low-level primitives: StatusBadge, SearchBar, FilterTabs, FAB, ProgressBar, … |
+| `components/pin/` | PIN auth: PinPad, LockScreen, PinSetup |
+| `components/sheets/` | Bottom-sheet modals: ConfirmSheet, RenameSheet, DatePickerModal, TimePickerModal |
+| `components/form/` | Form building blocks: SectionTitle, FormCard, InputRow, DateRow, TimeRow, ToggleRow, ChipSelect |
+
 ### Building blocks
 
 | Component | Description |
@@ -107,6 +116,7 @@ import {
 | `TimelineItem` | Timeline row with connector line |
 | `StatusSelector` | Horizontal scrolling status badge picker |
 | `ToggleCard` | Settings toggle card with custom switch |
+| `PinPad` | PIN dot indicators + number grid (used by `LockScreen`/`PinSetup`, also standalone) |
 
 ### Form components (`FormSection`)
 
@@ -250,6 +260,19 @@ import { cn } from "@drakkar.software/seahorse/utils/cn";
 ```
 
 `clsx` + `tailwind-merge` — bundled as a direct dependency.
+
+### PIN helpers
+
+Pure TypeScript utilities (no React dependency) exported alongside `PinPad`:
+
+```ts
+import { handlePinDigit, handlePinDelete } from "@drakkar.software/seahorse/components";
+
+const { nextPin, isComplete } = handlePinDigit(currentPin, "5", 4);
+const trimmed = handlePinDelete(currentPin);
+```
+
+Useful for building custom PIN flows without the full `PinPad` UI.
 
 ---
 

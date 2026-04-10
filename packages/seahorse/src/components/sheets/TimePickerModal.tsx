@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
-import { BottomSheetModal, BottomSheetBackdrop, BottomSheetView } from "@gorhom/bottom-sheet";
+import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
+import { useBottomSheetModal } from "./useBottomSheetModal";
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, "0"));
 const MINUTES = Array.from({ length: 12 }, (_, i) => (i * 5).toString().padStart(2, "0"));
@@ -29,7 +30,7 @@ export function TimePickerModal({
   hoursLabel = "Hours",
   minutesLabel = "Minutes",
 }: TimePickerModalProps) {
-  const sheetRef = useRef<BottomSheetModal>(null);
+  const { ref: sheetRef, renderBackdrop } = useBottomSheetModal(visible);
   const hourRef = useRef<ScrollView>(null);
   const minuteRef = useRef<ScrollView>(null);
 
@@ -37,10 +38,7 @@ export function TimePickerModal({
   const [selectedMinute, setSelectedMinute] = useState("00");
 
   useEffect(() => {
-    if (!visible) {
-      sheetRef.current?.dismiss();
-      return;
-    }
+    if (!visible) return;
 
     const parts = value ? value.split(":") : [];
     const rawHH = parts[0] ?? "";
@@ -55,8 +53,6 @@ export function TimePickerModal({
           : "00";
     setSelectedHour(h);
     setSelectedMinute(m);
-
-    sheetRef.current?.present();
 
     const timer = setTimeout(() => {
       const hIdx = HOURS.indexOf(h);
@@ -77,13 +73,6 @@ export function TimePickerModal({
     onClear();
     onClose();
   };
-
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior="close" />
-    ),
-    []
-  );
 
   return (
     <BottomSheetModal

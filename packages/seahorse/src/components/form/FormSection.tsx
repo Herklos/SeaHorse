@@ -4,8 +4,8 @@ import { CheckCircle2, Circle, Calendar, Clock } from "lucide-react-native";
 import { format, parseISO } from "date-fns";
 import { enUS } from "date-fns/locale";
 import type { Locale } from "date-fns";
-import { DatePickerModal } from "./DatePickerModal";
-import { TimePickerModal } from "./TimePickerModal";
+import { DatePickerModal } from "../sheets/DatePickerModal";
+import { TimePickerModal } from "../sheets/TimePickerModal";
 
 /** Section heading for form screens */
 export function SectionTitle({ children }: { children: string }) {
