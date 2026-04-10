@@ -2,6 +2,62 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.4.0] — 2026-04-10
+
+### Added
+
+- **`./primitives` export** — Full foundational UI primitives layer (37 components across 20 modules). All zero-business-logic, NativeWind v5 + Tailwind CSS v4 semantic tokens, platform-split `.web.tsx` where applicable.
+
+**Layout & Typography**
+- `Box` — `View` wrapper, web variant adds `flex flex-col min-h-0 min-w-0`
+- `HStack` / `VStack` — flex row/column with `space` gap prop and `reversed` prop
+- `Center` — centered flex container
+- `View` — thin re-export of RN `View`
+- `Divider` — `orientation` prop, `bg-background-200`, web `role="separator"`
+- `Text` — `size/bold/italic/underline/strikeThrough/isTruncated/sub/highlight` props; base `text-typography-700 font-body`
+- `Heading` — maps sizes to semantic H1-H6 via `@expo/html-elements` (native) or h1-h6 (web); `cssInterop` for NW v5
+- `Icon` — `as` prop for lucide icons, `size` (string or number)
+- `Pressable` — NW v5 `data-[focus-visible]` / `data-[disabled]` styling
+- `Image` — `size` prop, `revert-layer` web guard
+
+**Form Controls**
+- `Button` + `ButtonText` + `ButtonSpinner` + `ButtonIcon` + `ButtonGroup` — 5 actions × 4 variants × 5 sizes, context-based
+- `Input` + `InputField` + `InputSlot` + `InputIcon` — 3 variants × 4 sizes, dual `dataSet`/`data-*` attrs
+- `Textarea` + `TextareaInput`
+- `Checkbox` + `CheckboxIndicator` + `CheckboxLabel` + `CheckboxIcon` + `CheckboxGroup` — `DefaultCheckIcon` via `react-native-svg`
+- `Radio` + `RadioIndicator` + `RadioLabel` + `RadioIcon` + `RadioGroup` — platform-aware (View+onClick web, Pressable native)
+- `Switch` — `cssInterop` + size scale variants
+- `Slider` + `SliderTrack` + `SliderFilledTrack` + `SliderThumb` — PanResponder-based, no external deps
+- `Select` + `SelectTrigger` + `SelectInput` + `SelectIcon` + `SelectPortal` + `SelectItem` + all Actionsheet delegates — self-contained Actionsheet using RN Modal
+- `FormControl` + `FormControlLabel` + `FormControlLabelText` + `FormControlLabelAstrick` + `FormControlHelper` + `FormControlHelperText` + `FormControlError` + `FormControlErrorText` + `FormControlErrorIcon`
+- `Spinner` — `cssInterop` ActivityIndicator
+
+**Feedback & Display**
+- `Modal` + `ModalBackdrop` + `ModalContent` + `ModalHeader` + `ModalBody` + `ModalFooter` + `ModalCloseButton` — 5 sizes, RN Modal
+- `AlertDialog` — same as Modal but `closeOnOverlayClick = false` default
+- `Alert` + `AlertText` + `AlertIcon` — 5 actions, 2 variants
+- `Badge` + `BadgeText` + `BadgeIcon` — 5 actions, 2 variants, 3 sizes
+- `Avatar` + `AvatarBadge` + `AvatarFallbackText` + `AvatarImage` + `AvatarGroup` — 6 sizes
+- `Skeleton` + `SkeletonText` — Animated pulse, no external deps
+- `Card` — 3 sizes × 4 variants, web variant
+- `NotificationDot` — positioned count badge; semantic color tokens (`bg-error-500`, `bg-success-500`, etc.)
+- `Toast` + `ToastTitle` + `ToastDescription` + `ToastProvider` + `useToast` — animated queue via `@legendapp/motion`
+
+**Utilities**
+- `useBreakpointValue` / `getBreakPointValue` / `isValidBreakpoint` — exported from `./utils/use-breakpoint-value`
+- `lightHaptic` / `mediumHaptic` — exported from `./utils/haptics`
+- `useDebounce` — exported from `./utils/use-debounce`
+
+### Changed
+
+- All `cn` imports inside primitives use relative `../../utils/cn` (avoids self-referencing package import)
+
+### New peer dependencies
+
+- `@legendapp/motion >= 2.0.0` (optional, required by `Toast`)
+
+---
+
 ## [0.3.1] — 2026-04-10
 
 ### Fixed
