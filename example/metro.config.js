@@ -19,11 +19,11 @@ config.resolver.nodeModulesPaths = [
 // Support package exports
 config.resolver.unstable_conditionNames = ["import", "default", "require"];
 
-// Force singleton packages to the app's copy so shared React contexts
-// (BottomSheetModalProvider, GestureHandlerRootView, etc.) are not split
-// across two module instances. pnpm resolves peer deps per-package, giving
-// the library its own copy in packages/seahorse/node_modules — Metro would
-// pick that up first for files inside the library tree.
+// Packages that must share a single module instance — pnpm resolves peer deps
+// per-package so the library gets its own copy in packages/seahorse/node_modules,
+// which Metro finds first for files inside that tree. Using resolveRequest to
+// hard-redirect these to the app's copy beats extraNodeModules (which is a
+// fallback that doesn't override an already-found resolution).
 const singletons = [
   "react",
   "react-native",
@@ -31,13 +31,25 @@ const singletons = [
   "react-native-gesture-handler",
   "@gorhom/bottom-sheet",
 ];
-config.resolver.extraNodeModules = Object.fromEntries(
-  singletons.map((pkg) => [pkg, path.resolve(projectRoot, "node_modules", pkg)])
-);
 
 const originalResolveRequest = config.resolver.resolveRequest;
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   const resolve = originalResolveRequest ?? context.resolveRequest;
+
+  // Singleton redirect — force these packages to always resolve from the app's
+  // node_modules, not from packages/seahorse/node_modules. Metro's own resolver
+  // is used (so react-native/platform extensions still work) with originModulePath
+  // overridden to a file inside projectRoot so the directory walk starts there.
+  const isSingleton = singletons.some(
+    (s) => moduleName === s || moduleName.startsWith(s + "/")
+  );
+  if (isSingleton) {
+    return context.resolveRequest(
+      { ...context, originModulePath: path.join(projectRoot, "_sentinel.js") },
+      moduleName,
+      platform
+    );
+  }
 
   // NativeWind v5 preview dropped jsx-runtime shims; expo-router still imports them.
   // Redirect to React's own runtime — NW's transform is Babel-level, not runtime.
