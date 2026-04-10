@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
+    "@tailwindcss/postcss": "^4.2.0",
     "@types/react": "^19.0.0",
     "tailwindcss": "^4.2.0",
     "typescript": "^5.5.0"
