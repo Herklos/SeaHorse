@@ -1,4 +1,5 @@
 // UI primitives
+export { BackButton } from "./ui/BackButton";
 export { StatusBadge } from "./ui/StatusBadge";
 export { DeleteButton } from "./ui/DeleteButton";
 export { SaveHeaderButton } from "./ui/SaveHeaderButton";

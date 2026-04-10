@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ScrollView, View, Text, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
+  BackButton,
   StatusBadge,
   DeleteButton,
   SearchBar,
@@ -22,6 +23,7 @@ import {
   DeadlineChip,
   HorizontalChipSelect,
 } from "@drakkar.software/seahorse/components";
+import { ImageBackground, FlashList } from "@drakkar.software/seahorse/primitives";
 import { Star, Package, Users } from "lucide-react-native";
 
 const STATUSES = [
@@ -136,6 +138,31 @@ export default function ComponentsScreen() {
             onChange={setToggled}
           />
           <DeleteButton onPress={() => setShowConfirm(true)} label="Delete item" />
+        </View>
+
+        <View className="gap-2">
+          <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Navigation & Media</Text>
+          <BackButton text="Go back" onPress={() => Alert.alert("Back pressed")} />
+          <ImageBackground
+            source={{ uri: "https://picsum.photos/800/200" }}
+            className="rounded-xl overflow-hidden"
+            style={{ height: 120 }}
+          >
+            <View className="flex-1 justify-end p-3">
+              <Text className="text-white font-semibold text-sm">ImageBackground</Text>
+            </View>
+          </ImageBackground>
+          <FlashList
+            data={["Alpha", "Beta", "Gamma", "Delta", "Epsilon"]}
+            estimatedItemSize={40}
+            style={{ height: 120 }}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <View className="px-3 py-2 border-b border-gray-100 dark:border-gray-800">
+                <Text className="text-sm">{item}</Text>
+              </View>
+            )}
+          />
         </View>
 
         <EmptyState

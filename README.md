@@ -6,7 +6,7 @@
 
 Generic UI components and utilities for React Native / Expo apps.
 
-**27 components** · **10 utility modules** · **Zero domain coupling** · **NativeWind v5 + Tailwind CSS v4**
+**30 components** · **10 utility modules** · **Zero domain coupling** · **NativeWind v5 + Tailwind CSS v4**
 
 ---
 
@@ -76,6 +76,23 @@ Without a provider the components default to blue `#3B82F6`.
 
 ## Components
 
+### Primitives
+
+Import from `@drakkar.software/seahorse/primitives`:
+
+```tsx
+import { Box, Text, Button, FlashList, ImageBackground } from "@drakkar.software/seahorse/primitives";
+```
+
+| Component | Description |
+|---|---|
+| `FlashList` | High-performance list wrapping `@legendapp/list`. Accepts `FlatListProps<T>` + `estimatedItemSize`. Requires `@legendapp/list` peer. |
+| `ImageBackground` | Platform-split image background. Native: RN `ImageBackground` with `className`. Web: `div` with CSS `backgroundImage`. Props: `source`, `className`, `style`. |
+
+---
+
+## Components
+
 Import from `@drakkar.software/seahorse/components` (or the root barrel):
 
 ```tsx
@@ -89,7 +106,7 @@ Source is organized into four subfolders — the public API is unchanged:
 
 | Folder | Contents |
 |---|---|
-| `components/ui/` | Low-level primitives: StatusBadge, SearchBar, FilterTabs, FAB, ProgressBar, … |
+| `components/ui/` | Low-level primitives: BackButton, StatusBadge, SearchBar, FilterTabs, FAB, ProgressBar, … |
 | `components/pin/` | PIN auth: PinPad, LockScreen, PinSetup |
 | `components/sheets/` | Bottom-sheet modals: ConfirmSheet, RenameSheet, DatePickerModal, TimePickerModal |
 | `components/form/` | Form building blocks: SectionTitle, FormCard, InputRow, DateRow, TimeRow, ToggleRow, ChipSelect |
@@ -116,6 +133,7 @@ Source is organized into four subfolders — the public API is unchanged:
 | `TimelineItem` | Timeline row with connector line |
 | `StatusSelector` | Horizontal scrolling status badge picker |
 | `ToggleCard` | Settings toggle card with custom switch |
+| `BackButton` | Ghost button with left arrow icon. Props: `text`, `onPress`, optional `className` |
 | `PinPad` | PIN dot indicators + number grid (used by `LockScreen`/`PinSetup`, also standalone) |
 
 ### Form components (`FormSection`)
@@ -246,6 +264,7 @@ Parse/serialize URL arrays stored as a single JSON string field.
 | `@expo/html-elements >=55` | Heading primitive |
 | `react-native-svg >=15` | Checkbox primitive |
 | `expo-haptics >=14` | haptics utility |
+| `@legendapp/list >=1` | FlashList primitive |
 
 All optional except `react`, `react-native`, `nativewind`, `lucide-react-native`.
 

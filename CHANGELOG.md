@@ -2,6 +2,25 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.5.0] — 2026-04-10
+
+### Added
+
+**Primitives**
+
+- `FlashList` — high-performance list component wrapping `@legendapp/list`'s `LegendList` with `recycleItems` and `drawDistance` defaults. Accepts `FlatListProps<T>` + optional `estimatedItemSize`. Requires `@legendapp/list` optional peer dependency.
+- `ImageBackground` — platform-split image background wrapper. Native: forwards to RN `ImageBackground` with `className` support. Web: `div` with CSS `backgroundImage`, `backgroundSize: cover`, `backgroundPosition: center`, and `overflow: hidden`. Accepts `source: { uri }`, `className`, and `style`.
+
+**Components**
+
+- `BackButton` — composed back-navigation button built from primitives (`Button`, `ButtonIcon`, `ButtonText`, `Box`). Props: `text`, `onPress`, optional `className`. Uses `ghost` variant with an `ArrowLeft` icon from `lucide-react-native`.
+
+### Changed
+
+- `@legendapp/list` added as an optional peer dependency (`>=1.0.0`).
+
+---
+
 ## [0.4.1] — 2026-04-10
 
 ### Changed
