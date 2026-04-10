@@ -2,24 +2,24 @@ import React from "react";
 import { View, Text, Pressable } from "react-native-css/components";
 
 interface StatCardProps {
-  icon: React.ReactNode;
+  icon: React.ComponentType<{ size?: number; color?: string; className?: string }>;
   label: string;
-  value: number;
+  value: string | number;
   unit?: string;
-  total?: number;
+  total?: string | number;
   footer?: string;
   alert?: React.ReactNode;
   onPress?: () => void;
 }
 
-export function StatCard({ icon, label, value, unit, total, footer, alert, onPress }: StatCardProps) {
+export function StatCard({ icon: Icon, label, value, unit, total, footer, alert, onPress }: StatCardProps) {
   return (
     <Pressable
       onPress={onPress}
       className="flex-1 bg-background-0 rounded-2xl p-4 border border-outline-100"
     >
       <View className="flex-row items-center mb-3">
-        {icon}
+        <Icon size={18} className="text-typography-500" />
         <Text className="text-sm font-semibold text-typography-900 ml-2">
           {label}
         </Text>

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native-css/components";
 
 interface IconCardProps {
-  icon: React.ReactNode;
+  icon: React.ComponentType<{ size?: number; color?: string; className?: string }>;
   title: string;
   subtitle?: string;
   right?: React.ReactNode;
@@ -11,11 +11,11 @@ interface IconCardProps {
   className?: string;
 }
 
-export function IconCard({ icon, title, subtitle, right, onPress, children, className }: IconCardProps) {
+export function IconCard({ icon: Icon, title, subtitle, right, onPress, children, className }: IconCardProps) {
   const content = (
     <>
       <View className="flex-row items-center">
-        {icon}
+        <Icon size={20} className="text-typography-500" />
         <View className="ml-3 flex-1">
           <Text className="text-base font-semibold text-typography-900">
             {title}

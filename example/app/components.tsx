@@ -66,9 +66,9 @@ export default function ComponentsScreen() {
           <FilterTabs tabs={FILTER_TABS} activeKey={filter} onSelect={setFilter} />
           <HorizontalChipSelect options={CHIP_OPTIONS} activeKey={chip} onSelect={setChip} />
           <SegmentedControl
-            options={[{ value: "list", label: "List" }, { value: "grid", label: "Grid" }]}
-            value={segment}
-            onChange={setSegment}
+            segments={[{ key: "list", label: "List" }, { key: "grid", label: "Grid" }]}
+            activeKey={segment}
+            onSelect={setSegment}
           />
         </View>
 

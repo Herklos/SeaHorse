@@ -166,23 +166,30 @@ Add `@source` directives pointing at your app files so Tailwind scans for class 
 
 ---
 
-## Theme (inline style colors)
+## App root setup
 
-A few components use inline `style={}` for shadow and toggle colors. Wrap your app in `ForgeThemeProvider` to set them:
+Wrap your root layout with the required providers. `BottomSheetModalProvider` is needed for all sheet/modal components; it must be inside `GestureHandlerRootView`:
 
 ```tsx
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { ForgeThemeProvider } from "@drakkar.software/seahorse/theme";
 
 export default function RootLayout() {
   return (
-    <ForgeThemeProvider theme={{ colors: { primary: "#EC4899" } }}>
-      {/* your app */}
-    </ForgeThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ForgeThemeProvider theme={{ colors: { primary: "#EC4899" } }}>
+        <BottomSheetModalProvider>
+          {/* your app / Stack / Tabs */}
+        </BottomSheetModalProvider>
+      </ForgeThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 ```
 
-Without a provider the components default to blue `#3B82F6`.
+Without `BottomSheetModalProvider`: runtime crash `'BottomSheetModalInternalContext' cannot be null`.  
+Without `ForgeThemeProvider`: inline-style colors (shadows, toggles) default to blue `#3B82F6`.
 
 ---
 
