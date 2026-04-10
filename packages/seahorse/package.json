@@ -1,6 +1,6 @@
 {
   "name": "@drakkar.software/seahorse",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Drakkar-Software/seahorse.git"
@@ -74,6 +74,7 @@
       "import": "./tailwind/preset.js"
     },
     "./tailwind-theme": {
+      "style": "./tailwind/theme.css",
       "import": "./tailwind/theme.css"
     },
     "./utils/cn": {

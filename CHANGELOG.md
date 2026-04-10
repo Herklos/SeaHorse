@@ -2,6 +2,12 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.3.1] — 2026-04-10
+
+### Fixed
+
+- **`./tailwind-theme` export** — added `"style"` export condition so Tailwind CSS v4's `@import` resolver can find the theme file from node_modules.
+
 ## [0.3.0] — 2026-04-10
 
 ### Added
