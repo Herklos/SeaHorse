@@ -92,21 +92,21 @@ export function PinSetup({
 
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="fullScreen">
-      <View className="flex-1 bg-gray-50 dark:bg-gray-950 items-center justify-center px-8">
+      <View className="flex-1 bg-background-0 items-center justify-center px-8">
         <Pressable
           onPress={handleCancel}
           className="absolute top-14 right-6 w-10 h-10 items-center justify-center"
         >
-          <X size={24} color="#9CA3AF" />
+          <X size={24} className="text-typography-400" />
         </Pressable>
 
-        <View className="w-14 h-14 rounded-2xl bg-primary-50 dark:bg-primary-900 items-center justify-center mb-6">
+        <View className="w-14 h-14 rounded-2xl bg-primary-50 items-center justify-center mb-6">
           <Lock size={28} color={colors.primary} />
         </View>
-        <Text className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <Text className="text-xl font-bold text-typography-900 mb-2">
           {step === "create" ? createTitle : confirmTitle}
         </Text>
-        <Text className="text-sm text-gray-400 mb-8">
+        <Text className="text-sm text-typography-400 mb-8">
           {step === "create" ? createSubtitle : confirmSubtitle}
         </Text>
 
@@ -117,16 +117,16 @@ export function PinSetup({
               key={i}
               className={`w-4 h-4 rounded-full ${
                 error
-                  ? "bg-red-500"
+                  ? "bg-error-500"
                   : i < pin.length
                     ? "bg-primary-500"
-                    : "bg-gray-200 dark:bg-gray-700"
+                    : "bg-outline-200"
               }`}
             />
           ))}
         </View>
 
-        {error && <Text className="text-sm text-red-500 mb-4">{mismatchError}</Text>}
+        {error && <Text className="text-sm text-error-500 mb-4">{mismatchError}</Text>}
 
         {/* Number pad */}
         <View className="w-full max-w-xs">
@@ -149,7 +149,7 @@ export function PinSetup({
                       className="items-center justify-center"
                       style={{ width: 72, height: 72 }}
                     >
-                      <Delete size={24} color="#9CA3AF" />
+                      <Delete size={24} className="text-typography-400" />
                     </Pressable>
                   );
                 }
@@ -157,10 +157,10 @@ export function PinSetup({
                   <Pressable
                     key={key}
                     onPress={() => handleDigit(key)}
-                    className="rounded-full bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 items-center justify-center active:bg-gray-100 dark:active:bg-gray-800"
+                    className="rounded-full bg-background-0 border border-outline-100 items-center justify-center active:bg-background-900"
                     style={{ width: 72, height: 72 }}
                   >
-                    <Text className="text-2xl font-medium text-gray-900 dark:text-white">
+                    <Text className="text-2xl font-medium text-typography-900">
                       {key}
                     </Text>
                   </Pressable>

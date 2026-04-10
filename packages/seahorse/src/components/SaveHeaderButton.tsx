@@ -15,7 +15,7 @@ export function SaveHeaderButton({ label, enabled, onPress }: SaveHeaderButtonPr
       onPress={enabled ? onPress : undefined}
       style={{
         marginRight: 8,
-        backgroundColor: enabled ? colors.primary : "#9CA3AF",
+        backgroundColor: enabled ? colors.primary : "rgb(163, 163, 163)",
         borderRadius: 999,
         paddingHorizontal: 16,
         paddingVertical: 6,

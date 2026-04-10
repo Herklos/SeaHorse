@@ -2,6 +2,36 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.2.0] — 2026-04-10
+
+> **Breaking**: Requires NativeWind v5 + Tailwind CSS v4. Minimum React 19, React Native 0.83.
+
+### Added
+
+- **`tailwind/theme.css`** — Full semantic color token system via CSS custom properties. Consumers `@import "@drakkar.software/seahorse/tailwind-theme"` and override `:root` variables for their brand. Replaces `tailwind-preset`. Tokens: `primary/secondary/tertiary/error/success/warning/info` (0-950), `typography/outline` (0-950), `background` (0-950 + error/warning/success/muted/info), `indicator` (primary/info/error), shadows (hard-1..5, soft-1..4), font families.
+- **`utils/cn`** — `cn(...inputs)` — `clsx` + `tailwind-merge` utility. Import from `@drakkar.software/seahorse/utils/cn`.
+- **`FilterTabs`**: extended with `icon?`, `hidden?` props (now a superset of the old chip-only API).
+- New subpath exports: `./tailwind-theme`, `./utils/cn`.
+- New optional peer deps: `@expo/html-elements >=55`, `react-native-svg >=15`, `expo-haptics >=14`.
+
+### Changed
+
+- **All 26 components**: migrated from hardcoded `bg-gray-*`/`text-gray-*`/`dark:*` class pairs to semantic token classes (`bg-background-0`, `text-typography-900`, `border-outline-100`, etc.). Dark mode is now handled automatically by the CSS token system — no more `dark:` class duplication in components.
+- `ProgressBar` budget overflow: `bg-red-500` → `bg-error-500`, `bg-amber-400` → `bg-warning-400`, `bg-emerald-400` → `bg-success-400`.
+- `DeadlineChip`: converted from inline `style={{ backgroundColor, color }}` to className-based semantic tokens (`bg-background-error`, `bg-background-warning`, `bg-background-info`, `bg-background-muted`).
+- `EmptyState`: default `iconBgClassName` changed from `"bg-gray-100 dark:bg-gray-800"` to `"bg-background-900"`.
+- `RatingStars`: default empty star color changed from `#D1D5DB` to `rgb(221, 220, 219)` (outline-200).
+
+### Infrastructure
+
+- Peer dep `nativewind` bumped to `>=5.0.0`.
+- New peer dep `react-native-css >=3.0.0` (required by NW v5 for `cssInterop`).
+- Peer dep `react` bumped to `>=19.0.0`, `react-native` to `>=0.83.0`.
+- Direct deps added: `clsx ^2.1.0`, `tailwind-merge ^3.0.0`.
+- Example app: removed `tailwind.config.js`, migrated to `global.css` with TW v4 `@import` syntax.
+
+---
+
 ## [0.1.1] — 2026-04-10
 
 ### Fixed

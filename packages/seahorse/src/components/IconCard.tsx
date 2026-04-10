@@ -17,11 +17,11 @@ export function IconCard({ icon, title, subtitle, right, onPress, children, clas
       <View className="flex-row items-center">
         {icon}
         <View className="ml-3 flex-1">
-          <Text className="text-base font-semibold text-gray-900 dark:text-white">
+          <Text className="text-base font-semibold text-typography-900">
             {title}
           </Text>
           {subtitle != null && (
-            <Text className="text-xs text-gray-400 mt-0.5">{subtitle}</Text>
+            <Text className="text-xs text-typography-400 mt-0.5">{subtitle}</Text>
           )}
         </View>
         {right}
@@ -34,7 +34,7 @@ export function IconCard({ icon, title, subtitle, right, onPress, children, clas
     return (
       <Pressable
         onPress={onPress}
-        className={`bg-white dark:bg-gray-900 rounded-2xl p-4 mb-3 border border-gray-100 dark:border-gray-800 active:opacity-80 ${className ?? ""}`}
+        className={`bg-background-0 rounded-2xl p-4 mb-3 border border-outline-100 active:opacity-80 ${className ?? ""}`}
       >
         {content}
       </Pressable>
@@ -42,7 +42,7 @@ export function IconCard({ icon, title, subtitle, right, onPress, children, clas
   }
 
   return (
-    <View className={`bg-white dark:bg-gray-900 rounded-2xl p-4 mb-3 border border-gray-100 dark:border-gray-800 ${className ?? ""}`}>
+    <View className={`bg-background-0 rounded-2xl p-4 mb-3 border border-outline-100 ${className ?? ""}`}>
       {content}
     </View>
   );

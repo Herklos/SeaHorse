@@ -14,8 +14,8 @@ interface SegmentedControlProps {
 
 export function SegmentedControl({ segments, activeKey, onSelect }: SegmentedControlProps) {
   return (
-    <View className="px-4 pt-3 pb-2 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
-      <View className="flex-row bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
+    <View className="px-4 pt-3 pb-2 bg-background-0 border-b border-outline-100">
+      <View className="flex-row bg-background-900 rounded-xl p-1">
         {segments.map((seg) => {
           const isActive = seg.key === activeKey;
           return (
@@ -23,12 +23,12 @@ export function SegmentedControl({ segments, activeKey, onSelect }: SegmentedCon
               key={seg.key}
               onPress={() => onSelect(seg.key)}
               className={`flex-1 py-2 rounded-lg items-center ${
-                isActive ? "bg-white dark:bg-gray-700 shadow-sm" : ""
+                isActive ? "bg-background-0 shadow-soft-1" : ""
               }`}
             >
               <Text
                 className={`text-sm font-medium ${
-                  isActive ? "text-primary-500" : "text-gray-500 dark:text-gray-400"
+                  isActive ? "text-primary-500" : "text-typography-500"
                 }`}
               >
                 {seg.label}

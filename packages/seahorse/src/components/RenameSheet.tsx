@@ -57,25 +57,25 @@ export function RenameSheet({
       handleComponent={() => null}
     >
       <BottomSheetView>
-        <View className="bg-white dark:bg-gray-900 rounded-t-3xl px-6 pt-6 pb-10">
-          <View className="w-10 h-1 rounded-full bg-gray-200 dark:bg-gray-700 self-center mb-5" />
-          <Text className="text-xl font-bold text-gray-900 dark:text-white mb-4">{title}</Text>
+        <View className="bg-background-0 rounded-t-3xl px-6 pt-6 pb-10">
+          <View className="w-10 h-1 rounded-full bg-outline-200 self-center mb-5" />
+          <Text className="text-xl font-bold text-typography-900 mb-4">{title}</Text>
           <TextInput
             value={value}
             onChangeText={setValue}
             placeholder={placeholder}
-            placeholderTextColor="#D0D0D8"
+            placeholderTextColor="rgb(212, 212, 212)"
             autoFocus
             style={{
               fontSize: 16,
-              color: "#111827",
-              backgroundColor: "#F9FAFB",
+              color: "rgb(38, 38, 39)",
+              backgroundColor: "rgb(247, 249, 250)",
               borderRadius: 12,
               paddingHorizontal: 14,
               paddingVertical: 12,
               marginBottom: 16,
               borderWidth: 1,
-              borderColor: "#E5E7EB",
+              borderColor: "rgb(230, 230, 230)",
             }}
           />
           <View className="gap-3">
@@ -87,9 +87,9 @@ export function RenameSheet({
             </Pressable>
             <Pressable
               onPress={onCancel}
-              className="py-3.5 rounded-2xl items-center bg-gray-100 dark:bg-gray-800 active:opacity-80"
+              className="py-3.5 rounded-2xl items-center bg-background-900 active:opacity-80"
             >
-              <Text className="text-gray-700 dark:text-gray-300 font-medium text-base">
+              <Text className="text-typography-700 font-medium text-base">
                 {cancelLabel}
               </Text>
             </Pressable>

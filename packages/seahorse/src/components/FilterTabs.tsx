@@ -1,10 +1,13 @@
 import React from "react";
 import { ScrollView, Pressable, Text } from "react-native";
+import type { LucideIcon } from "lucide-react-native";
 
 interface FilterTab {
   key: string;
   label: string;
   count?: number;
+  icon?: LucideIcon;
+  hidden?: boolean;
 }
 
 interface FilterTabsProps {
@@ -23,6 +26,7 @@ export function FilterTabs({ tabs, activeKey, onSelect, className }: FilterTabsP
       contentContainerStyle={{ paddingHorizontal: 16, gap: 8 }}
     >
       {tabs.map((tab) => {
+        if (tab.hidden) return null;
         const isActive = tab.key === activeKey;
         return (
           <Pressable
@@ -31,12 +35,12 @@ export function FilterTabs({ tabs, activeKey, onSelect, className }: FilterTabsP
             className={`px-4 py-2 rounded-full border ${
               isActive
                 ? "bg-primary-500 border-primary-500"
-                : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700"
+                : "bg-background-0 border-outline-200"
             }`}
           >
             <Text
               className={`text-sm font-medium ${
-                isActive ? "text-white" : "text-gray-600 dark:text-gray-400"
+                isActive ? "text-white" : "text-typography-600"
               }`}
             >
               {tab.label}

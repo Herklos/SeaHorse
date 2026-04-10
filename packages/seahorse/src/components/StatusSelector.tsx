@@ -27,7 +27,7 @@ export function StatusSelector({ options, activeKey, onSelect, className }: Stat
         <Pressable key={opt.key} onPress={() => onSelect(opt.key)}>
           <StatusBadge
             label={opt.label}
-            color={activeKey === opt.key ? opt.color : "#D1D5DB"}
+            color={activeKey === opt.key ? opt.color : "rgb(165, 163, 163)"}
             size="md"
           />
         </Pressable>

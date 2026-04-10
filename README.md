@@ -6,7 +6,16 @@
 
 Generic UI components and utilities for React Native / Expo apps.
 
-**24 components** · **7 utility modules** · **Zero domain coupling** · **NativeWind v4**
+**26 components** · **10 utility modules** · **Zero domain coupling** · **NativeWind v5 + Tailwind CSS v4**
+
+---
+
+## Requirements
+
+- React 19+, React Native 0.83+
+- NativeWind v5 (`^5.0.0-preview.3`)
+- Tailwind CSS v4 (`^4.2.0`)
+- `react-native-css ^3.0.6`
 
 ---
 
@@ -16,36 +25,32 @@ Generic UI components and utilities for React Native / Expo apps.
 pnpm add @drakkar.software/seahorse
 ```
 
-Add the Tailwind preset to your `tailwind.config.js`:
+In your app's `global.css`, import the SeaHorse theme **before** your own brand overrides:
 
-```js
-module.exports = {
-  presets: [require("nativewind/preset"), require("@drakkar.software/seahorse/tailwind-preset")],
-  content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
-    // include SeaHorse components so Tailwind sees the class names
-    "./node_modules/@drakkar.software/seahorse/src/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        // Define your own brand color — SeaHorse components use primary-* tokens
-        primary: {
-          50:  "#fdf2f8",
-          100: "#fce7f3",
-          // ...
-          500: "#ec4899",
-          600: "#db2777",
-          // ...
-        },
-      },
-    },
-  },
-};
+```css
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+@import "nativewind/theme";
+
+/* SeaHorse semantic token defaults */
+@import "@drakkar.software/seahorse/tailwind-theme";
+
+/* Override with your brand colors */
+@layer theme {
+  :root {
+    --color-primary-500: 236 72 153;   /* pink-500 */
+    --color-secondary-500: 71 85 105;  /* slate-500 */
+  }
+  :root.dark {
+    --color-primary-500: 244 114 182;  /* pink-400 */
+  }
+}
 ```
 
-> The SeaHorse preset ships **no colors**. You define `primary` to match your brand.
+> Token values are **RGB triplets** (no `rgb()` wrapper) so Tailwind's opacity modifiers (`bg-primary-500/50`) work correctly.
+
+Add `@source` directives pointing at your app files so Tailwind scans for class names.
 
 ---
 
@@ -217,17 +222,34 @@ Parse/serialize URL arrays stored as a single JSON string field.
 
 | Dependency | Used by |
 |---|---|
-| `react`, `react-native`, `nativewind`, `lucide-react-native` | All components |
-| `@gorhom/bottom-sheet` | ConfirmSheet, RenameSheet, DatePickerModal, TimePickerModal |
-| `date-fns` | DatePickerModal, DeadlineChip, FormSection DateRow |
-| `expo-secure-store` | secure-store, app-lock |
-| `expo-local-authentication` | app-lock |
-| `expo-sqlite` | kv-storage (native) |
-| `@react-native-async-storage/async-storage` | kv-storage (web) |
-| `expo-file-system`, `expo-sharing`, `expo-print`, `expo-document-picker` | file-export |
-| `sonner`, `sonner-native` | toast |
+| Dependency | Used by |
+|---|---|
+| `react >=19`, `react-native >=0.83`, `nativewind >=5`, `lucide-react-native` | All components |
+| `react-native-css >=3` | Heading, Spinner, Switch (cssInterop) |
+| `@gorhom/bottom-sheet >=5` | ConfirmSheet, RenameSheet, DatePickerModal, TimePickerModal |
+| `date-fns >=3` | DatePickerModal, DeadlineChip, FormSection DateRow |
+| `expo-secure-store >=13` | secure-store, app-lock |
+| `expo-local-authentication >=14` | app-lock |
+| `expo-sqlite >=14` | kv-storage (native) |
+| `@react-native-async-storage/async-storage >=2` | kv-storage (web) |
+| `expo-file-system >=17`, `expo-sharing >=12`, `expo-print >=13`, `expo-document-picker >=12` | file-export |
+| `sonner >=2`, `sonner-native >=0.20` | toast |
+| `expo-updates >=0.25` | ota-update |
+| `@expo/html-elements >=55` | Heading primitive |
+| `react-native-svg >=15` | Checkbox primitive |
+| `expo-haptics >=14` | haptics utility |
 
 All optional except `react`, `react-native`, `nativewind`, `lucide-react-native`.
+
+### `cn` utility
+
+```ts
+import { cn } from "@drakkar.software/seahorse/utils/cn";
+
+<View className={cn("p-4", isActive && "bg-primary-500")} />
+```
+
+`clsx` + `tailwind-merge` — bundled as a direct dependency.
 
 ---
 

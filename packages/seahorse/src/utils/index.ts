@@ -1,3 +1,4 @@
+export { cn } from "./cn";
 export { secureGet, secureSet, secureDelete } from "./secure-store";
 export { initStorage, getStorage, closeStorage, readCollection, writeCollection } from "./kv-storage";
 export { generateKey, encryptData, decryptData } from "./crypto";

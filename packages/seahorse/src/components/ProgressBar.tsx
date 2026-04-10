@@ -21,9 +21,9 @@ export function ProgressBar({
 
   let barColor = "bg-primary-400";
   if (colorScheme === "budget") {
-    if (overflow) barColor = "bg-red-500";
-    else if (percentage >= 90) barColor = "bg-amber-400";
-    else barColor = "bg-emerald-400";
+    if (overflow) barColor = "bg-error-500";
+    else if (percentage >= 90) barColor = "bg-warning-400";
+    else barColor = "bg-success-400";
   }
 
   return (
@@ -31,16 +31,16 @@ export function ProgressBar({
       {(label || showPercentage) && (
         <View className="flex-row justify-between mb-1.5">
           {label && (
-            <Text className="text-sm text-gray-500 dark:text-gray-400">{label}</Text>
+            <Text className="text-sm text-typography-500">{label}</Text>
           )}
           {showPercentage && (
-            <Text className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+            <Text className="text-sm font-semibold text-typography-700">
               {Math.round(percentage)}%
             </Text>
           )}
         </View>
       )}
-      <View className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+      <View className="h-2 bg-background-900 rounded-full overflow-hidden">
         <View
           className={`h-full rounded-full ${barColor}`}
           style={{ width: `${Math.min(percentage, 100)}%` }}

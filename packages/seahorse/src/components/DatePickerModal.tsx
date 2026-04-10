@@ -113,8 +113,8 @@ export function DatePickerModal({
       handleComponent={() => null}
     >
       <BottomSheetView>
-        <View className="bg-white dark:bg-gray-900 rounded-t-3xl px-5 pt-5 pb-8">
-          <View className="w-10 h-1 rounded-full bg-gray-200 dark:bg-gray-700 self-center mb-4" />
+        <View className="bg-background-0 rounded-t-3xl px-5 pt-5 pb-8">
+          <View className="w-10 h-1 rounded-full bg-outline-200 self-center mb-4" />
 
           {/* Month navigation */}
           <View className="flex-row items-center justify-between mb-3">
@@ -122,16 +122,16 @@ export function DatePickerModal({
               onPress={() => setDisplayMonth(subMonths(displayMonth, 1))}
               className="p-2"
             >
-              <ChevronLeft size={20} color="#9CA3AF" />
+              <ChevronLeft size={20} className="text-typography-400" />
             </Pressable>
-            <Text className="text-base font-semibold text-gray-900 dark:text-white capitalize">
+            <Text className="text-base font-semibold text-typography-900 capitalize">
               {format(displayMonth, "MMMM yyyy", { locale: dateLocale })}
             </Text>
             <Pressable
               onPress={() => setDisplayMonth(addMonths(displayMonth, 1))}
               className="p-2"
             >
-              <ChevronRight size={20} color="#9CA3AF" />
+              <ChevronRight size={20} className="text-typography-400" />
             </Pressable>
           </View>
 
@@ -139,7 +139,7 @@ export function DatePickerModal({
           <View className="flex-row mb-1">
             {dayHeaders.map((d, i) => (
               <View key={i} className="flex-1 items-center py-1">
-                <Text className="text-xs font-medium text-gray-400 uppercase">{d}</Text>
+                <Text className="text-xs font-medium text-typography-400 uppercase">{d}</Text>
               </View>
             ))}
           </View>
@@ -172,8 +172,8 @@ export function DatePickerModal({
                           selected
                             ? "text-white font-semibold"
                             : !inMonth
-                              ? "text-gray-300 dark:text-gray-600"
-                              : "text-gray-700 dark:text-gray-300"
+                              ? "text-typography-300"
+                              : "text-typography-700"
                         }`}
                       >
                         {format(day, "d")}
@@ -195,9 +195,9 @@ export function DatePickerModal({
             </Pressable>
             <Pressable
               onPress={handleClear}
-              className="flex-1 py-3 rounded-2xl items-center bg-gray-100 dark:bg-gray-800 active:opacity-80"
+              className="flex-1 py-3 rounded-2xl items-center bg-background-900 active:opacity-80"
             >
-              <Text className="text-gray-700 dark:text-gray-300 font-medium text-sm">
+              <Text className="text-typography-700 font-medium text-sm">
                 {clearLabel}
               </Text>
             </Pressable>

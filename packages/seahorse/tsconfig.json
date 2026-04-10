@@ -7,7 +7,6 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "jsx": "react-jsx",
-    "jsxImportSource": "nativewind",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

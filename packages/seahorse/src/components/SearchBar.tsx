@@ -13,18 +13,18 @@ interface SearchBarProps {
 export function SearchBar({ value, onChangeText, placeholder, right, className }: SearchBarProps) {
   return (
     <View className={className}>
-      <View className="flex-row items-center bg-white dark:bg-gray-900 rounded-xl px-3.5 py-2.5 border border-gray-100 dark:border-gray-800">
-        <Search size={18} color="#C0C0C8" />
+      <View className="flex-row items-center bg-background-0 rounded-xl px-3.5 py-2.5 border border-outline-100">
+        <Search size={18} className="text-outline-300" />
         <TextInput
-          className="flex-1 ml-2.5 text-base text-gray-900 dark:text-white"
+          className="flex-1 ml-2.5 text-base text-typography-900"
           placeholder={placeholder}
-          placeholderTextColor="#C0C0C8"
+          placeholderTextColor="rgb(211, 211, 211)"
           value={value}
           onChangeText={onChangeText}
         />
         {value.length > 0 && (
           <Pressable onPress={() => onChangeText("")}>
-            <XCircle size={18} color="#C0C0C8" />
+            <XCircle size={18} className="text-outline-300" />
           </Pressable>
         )}
         {right}

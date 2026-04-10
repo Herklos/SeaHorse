@@ -23,16 +23,16 @@ export function CollapsibleSection({
         onPress={() => setExpanded((v) => !v)}
         className="flex-row items-center justify-between mt-3 mb-2"
       >
-        <Text className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+        <Text className="text-xs font-semibold text-typography-400 uppercase tracking-wider">
           {title}
           {count != null && (
-            <Text className="text-xs text-gray-300 dark:text-gray-600"> ({count})</Text>
+            <Text className="text-xs text-typography-300"> ({count})</Text>
           )}
         </Text>
         {expanded ? (
-          <ChevronUp size={14} color="#9CA3AF" />
+          <ChevronUp size={14} className="text-typography-400" />
         ) : (
-          <ChevronDown size={14} color="#9CA3AF" />
+          <ChevronDown size={14} className="text-typography-400" />
         )}
       </Pressable>
       {expanded && children}

@@ -6,10 +6,11 @@ interface RatingStarsProps {
   rating: number;
   onChange?: (rating: number) => void;
   size?: number;
+  /** Color for filled stars. Defaults to warning-400 (amber). */
   color?: string;
 }
 
-export function RatingStars({ rating, onChange, size = 20, color = "#F59E0B" }: RatingStarsProps) {
+export function RatingStars({ rating, onChange, size = 20, color = "rgb(245, 158, 11)" }: RatingStarsProps) {
   return (
     <View className="flex-row gap-1">
       {[1, 2, 3, 4, 5].map((star) => {
@@ -22,7 +23,7 @@ export function RatingStars({ rating, onChange, size = 20, color = "#F59E0B" }: 
           >
             <Star
               size={size}
-              color={filled ? color : "#D1D5DB"}
+              color={filled ? color : "rgb(221, 220, 219)"}
               fill={filled ? color : "transparent"}
             />
           </Pressable>

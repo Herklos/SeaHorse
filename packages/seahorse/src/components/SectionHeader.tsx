@@ -10,11 +10,11 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, subtitle, right, children }: SectionHeaderProps) {
   return (
-    <View className="px-4 pt-3 pb-3 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+    <View className="px-4 pt-3 pb-3 bg-background-0 border-b border-outline-100">
       {(title || right) && (
         <View className={`flex-row items-center justify-between${children ? " mb-3" : ""}`}>
           {title && (
-            <Text className="text-base font-semibold text-gray-900 dark:text-white">
+            <Text className="text-base font-semibold text-typography-900">
               {title}
             </Text>
           )}
@@ -22,10 +22,10 @@ export function SectionHeader({ title, subtitle, right, children }: SectionHeade
         </View>
       )}
       {subtitle && !title && !right && (
-        <Text className="text-sm text-gray-400">{subtitle}</Text>
+        <Text className="text-sm text-typography-400">{subtitle}</Text>
       )}
       {subtitle && (title || right) && (
-        <Text className="text-sm text-gray-400">{subtitle}</Text>
+        <Text className="text-sm text-typography-400">{subtitle}</Text>
       )}
       {children}
     </View>

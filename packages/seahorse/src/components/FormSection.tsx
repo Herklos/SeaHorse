@@ -10,7 +10,7 @@ import { TimePickerModal } from "./TimePickerModal";
 /** Section heading for form screens */
 export function SectionTitle({ children }: { children: string }) {
   return (
-    <Text className="text-xs font-semibold text-gray-400 dark:text-gray-500 mb-2 uppercase tracking-wider">
+    <Text className="text-xs font-semibold text-typography-400 mb-2 uppercase tracking-wider">
       {children}
     </Text>
   );
@@ -19,7 +19,7 @@ export function SectionTitle({ children }: { children: string }) {
 /** Card wrapper for form sections */
 export function FormCard({ children }: { children: React.ReactNode }) {
   return (
-    <View className="bg-white dark:bg-gray-900 rounded-2xl p-4 mb-5 border border-gray-100 dark:border-gray-800">
+    <View className="bg-background-0 rounded-2xl p-4 mb-5 border border-outline-100">
       {children}
     </View>
   );
@@ -47,17 +47,17 @@ export function InputRow({
   return (
     <Pressable
       onPress={() => inputRef.current?.focus()}
-      className="border-b border-gray-50 dark:border-gray-800 py-3"
+      className="border-b border-outline-50 py-3"
     >
-      <Text className="text-xs text-gray-400 mb-1 font-medium">{label}</Text>
+      <Text className="text-xs text-typography-400 mb-1 font-medium">{label}</Text>
       <TextInput
         ref={inputRef}
-        className="text-base text-gray-900 dark:text-white"
+        className="text-base text-typography-900"
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
         placeholder={placeholder}
-        placeholderTextColor="#D0D0D8"
+        placeholderTextColor="rgb(212, 212, 212)"
         keyboardType={keyboardType}
         multiline={multiline}
         textAlignVertical={multiline ? "top" : "center"}
@@ -101,17 +101,17 @@ export function DateRow({
     <>
       <Pressable
         onPress={() => setOpen(true)}
-        className="flex-row items-center justify-between border-b border-gray-50 dark:border-gray-800 py-3"
+        className="flex-row items-center justify-between border-b border-outline-50 py-3"
       >
         <View className="flex-1">
-          <Text className="text-xs text-gray-400 mb-1 font-medium">{label}</Text>
+          <Text className="text-xs text-typography-400 mb-1 font-medium">{label}</Text>
           <Text
-            className={`text-base ${displayValue ? "text-gray-900 dark:text-white" : "text-gray-300"}`}
+            className={`text-base ${displayValue ? "text-typography-900" : "text-typography-300"}`}
           >
             {displayValue ?? placeholder ?? selectDateLabel}
           </Text>
         </View>
-        <Calendar size={18} color="#9CA3AF" />
+        <Calendar size={18} className="text-typography-400" />
       </Pressable>
       <DatePickerModal
         visible={open}
@@ -155,17 +155,17 @@ export function TimeRow({
     <>
       <Pressable
         onPress={() => setOpen(true)}
-        className="flex-row items-center justify-between border-b border-gray-50 dark:border-gray-800 py-3"
+        className="flex-row items-center justify-between border-b border-outline-50 py-3"
       >
         <View className="flex-1">
-          <Text className="text-xs text-gray-400 mb-1 font-medium">{label}</Text>
+          <Text className="text-xs text-typography-400 mb-1 font-medium">{label}</Text>
           <Text
-            className={`text-base ${value ? "text-gray-900 dark:text-white" : "text-gray-300"}`}
+            className={`text-base ${value ? "text-typography-900" : "text-typography-300"}`}
           >
             {value || placeholder || selectTimeLabel}
           </Text>
         </View>
-        <Clock size={18} color="#9CA3AF" />
+        <Clock size={18} className="text-typography-400" />
       </Pressable>
       <TimePickerModal
         visible={open}
@@ -195,13 +195,13 @@ export function ToggleRow({
   return (
     <Pressable
       onPress={onToggle}
-      className="flex-row items-center justify-between py-3 border-b border-gray-50 dark:border-gray-800"
+      className="flex-row items-center justify-between py-3 border-b border-outline-50"
     >
-      <Text className="text-base text-gray-700 dark:text-gray-300">{label}</Text>
+      <Text className="text-base text-typography-700">{label}</Text>
       {value ? (
-        <CheckCircle2 size={24} color="#10B981" />
+        <CheckCircle2 size={24} className="text-success-500" />
       ) : (
-        <Circle size={24} color="#D1D5DB" />
+        <Circle size={24} className="text-outline-200" />
       )}
     </Pressable>
   );
@@ -230,11 +230,11 @@ export function ChipSelect<T extends string>({
             className={`px-3.5 py-2 rounded-full border ${
               isActive
                 ? "bg-primary-500 border-primary-500"
-                : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700"
+                : "bg-background-0 border-outline-200"
             }`}
           >
             <Text
-              className={`text-sm ${isActive ? "text-white font-medium" : "text-gray-500 dark:text-gray-400"}`}
+              className={`text-sm ${isActive ? "text-white font-medium" : "text-typography-500"}`}
             >
               {labels[opt]}
             </Text>

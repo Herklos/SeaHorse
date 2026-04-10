@@ -30,11 +30,11 @@ export function HorizontalChipSelect({ options, activeKey, onSelect, className }
             className={`px-3.5 py-2 rounded-full border ${
               isActive
                 ? "bg-primary-500 border-primary-500"
-                : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700"
+                : "bg-background-0 border-outline-200"
             }`}
           >
             <Text
-              className={`text-sm ${isActive ? "text-white font-medium" : "text-gray-500"}`}
+              className={`text-sm ${isActive ? "text-white font-medium" : "text-typography-500"}`}
             >
               {opt.label}
             </Text>

@@ -26,45 +26,42 @@ export function DeadlineChip({ date, labels = {} }: DeadlineChipProps) {
   const months = differenceInMonths(target, now);
 
   let label: string;
-  let bg: string;
-  let fg: string;
+  let bgClass: string;
+  let textClass: string;
   let useAlert = false;
 
   if (isToday(target)) {
     label = todayLabel;
-    bg = "#FEF2F2";
-    fg = "#DC2626";
+    bgClass = "bg-background-error";
+    textClass = "text-error-600";
     useAlert = true;
   } else if (isPast(target)) {
     label = overdueLabel;
-    bg = "#FEF2F2";
-    fg = "#DC2626";
+    bgClass = "bg-background-error";
+    textClass = "text-error-600";
     useAlert = true;
   } else if (days <= 7) {
     label = `${days}${daysLabel}`;
-    bg = "#FFFBEB";
-    fg = "#D97706";
+    bgClass = "bg-background-warning";
+    textClass = "text-warning-600";
   } else if (days <= 30) {
     label = `${days}${daysLabel}`;
-    bg = "#EFF6FF";
-    fg = "#2563EB";
+    bgClass = "bg-background-info";
+    textClass = "text-info-600";
   } else {
     label = `${months} ${monthsLabel}`;
-    bg = "#F3F4F6";
-    fg = "#6B7280";
+    bgClass = "bg-background-muted";
+    textClass = "text-typography-500";
   }
 
   return (
-    <View
-      className="flex-row items-center px-2 py-0.5 rounded-full gap-1"
-      style={{ backgroundColor: bg }}
-    >
+    <View className={`flex-row items-center px-2 py-0.5 rounded-full gap-1 ${bgClass}`}>
       {useAlert ? (
-        <AlertCircle size={11} color={fg} />
+        <AlertCircle size={11} className={textClass} />
       ) : (
-        <Clock size={11} color={fg} />
+        <Clock size={11} className={textClass} />
       )}
-      <Text className="text-xs font-medium" style={{ color: fg }}>
+      <Text className={`text-xs font-medium ${textClass}`}>
         {label}
       </Text>
     </View>

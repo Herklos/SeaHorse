@@ -51,24 +51,24 @@ export function ConfirmSheet({
       handleComponent={() => null}
     >
       <BottomSheetView>
-        <View className="bg-white dark:bg-gray-900 rounded-t-3xl px-6 pt-6 pb-10">
-          <View className="w-10 h-1 rounded-full bg-gray-200 dark:bg-gray-700 self-center mb-5" />
-          <Text className="text-xl font-bold text-gray-900 dark:text-white mb-2">{title}</Text>
-          <Text className="text-gray-500 dark:text-gray-400 mb-6 leading-5">{message}</Text>
+        <View className="bg-background-0 rounded-t-3xl px-6 pt-6 pb-10">
+          <View className="w-10 h-1 rounded-full bg-outline-200 self-center mb-5" />
+          <Text className="text-xl font-bold text-typography-900 mb-2">{title}</Text>
+          <Text className="text-typography-500 mb-6 leading-5">{message}</Text>
           <View className="gap-3">
             <Pressable
               onPress={onConfirm}
               className={`py-3.5 rounded-2xl items-center ${
-                destructive ? "bg-red-500" : "bg-primary-500"
+                destructive ? "bg-error-500" : "bg-primary-500"
               } active:opacity-80`}
             >
               <Text className="text-white font-semibold text-base">{confirmLabel}</Text>
             </Pressable>
             <Pressable
               onPress={onCancel}
-              className="py-3.5 rounded-2xl items-center bg-gray-100 dark:bg-gray-800 active:opacity-80"
+              className="py-3.5 rounded-2xl items-center bg-background-900 active:opacity-80"
             >
-              <Text className="text-gray-700 dark:text-gray-300 font-medium text-base">
+              <Text className="text-typography-700 font-medium text-base">
                 {cancelLabel}
               </Text>
             </Pressable>

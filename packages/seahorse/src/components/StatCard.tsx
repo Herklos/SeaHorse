@@ -16,29 +16,29 @@ export function StatCard({ icon, label, value, unit, total, footer, alert, onPre
   return (
     <Pressable
       onPress={onPress}
-      className="flex-1 bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-100 dark:border-gray-800"
+      className="flex-1 bg-background-0 rounded-2xl p-4 border border-outline-100"
     >
       <View className="flex-row items-center mb-3">
         {icon}
-        <Text className="text-sm font-semibold text-gray-900 dark:text-white ml-2">
+        <Text className="text-sm font-semibold text-typography-900 ml-2">
           {label}
         </Text>
       </View>
-      <Text className="text-3xl font-bold text-gray-900 dark:text-white">
+      <Text className="text-3xl font-bold text-typography-900">
         {value}
         {total != null && (
-          <Text className="text-lg text-gray-300 dark:text-gray-600 font-normal">
+          <Text className="text-lg text-typography-300 font-normal">
             /{total}
           </Text>
         )}
         {unit != null && (
-          <Text className="text-lg text-gray-300 dark:text-gray-600 font-normal">
+          <Text className="text-lg text-typography-300 font-normal">
             {unit}
           </Text>
         )}
       </Text>
       {footer != null && (
-        <Text className="text-xs text-gray-400 mt-1">{footer}</Text>
+        <Text className="text-xs text-typography-400 mt-1">{footer}</Text>
       )}
       {alert}
     </Pressable>
