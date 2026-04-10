@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo.png" alt="SeaHorse" width="200" />
+</p>
+
 # SeaHorse
 
 Generic UI components and utilities for React Native / Expo apps.
