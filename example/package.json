@@ -27,7 +27,7 @@
     "expo-updates": "^55.0.20",
     "lucide-react-native": "^1.8.0",
     "nativewind": "^5.0.0-preview.3",
-    "react": "19.2.0",
+    "react": "19.2.5",
     "react-native": "0.83.4",
     "react-native-css": "^3.0.6",
     "react-native-gesture-handler": "~2.30.1",
