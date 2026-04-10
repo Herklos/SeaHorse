@@ -34,3 +34,7 @@ export { PinPad, handlePinDigit, handlePinDelete } from "./pin/PinPad";
 export type { PinDigitResult } from "./pin/PinPad";
 export { LockScreen } from "./pin/LockScreen";
 export { PinSetup } from "./pin/PinSetup";
+
+// Onboarding
+export { OnboardingFlow, OnboardingScreen, OnboardingDots } from "./onboarding/index";
+export type { OnboardingFlowProps, OnboardingScreenProps, OnboardingDotsProps } from "./onboarding/index";

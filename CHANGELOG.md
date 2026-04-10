@@ -2,6 +2,20 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.6.0] — 2026-04-10
+
+### Added
+
+**Components**
+
+- `OnboardingFlow` — full-screen multi-step onboarding orchestrator. Renders children as horizontally-paginated screens with `Animated.ScrollView` + `pagingEnabled`, tracks active index via `onMomentumScrollEnd`, and exposes "Next", "Skip", and "Get Started" (last step) buttons. Props: `onComplete`, `onSkip?`, `nextButtonText`, `completeButtonText`, `skipButtonText`, `children`, `className`.
+- `OnboardingScreen` — single presentational onboarding screen. Top flex area accepts any `illustration` ReactNode (icon, image, custom component); bottom area renders `title` and `description`. Props: `illustration`, `title`, `description`, `className`, `illustrationClassName`, `titleClassName`, `descriptionClassName`.
+- `OnboardingDots` — page indicator dots. Active dot renders as a pill (`h-2 w-8 rounded-full bg-primary-500`), inactive as a circle (`h-2 w-2 rounded-full bg-outline-200`). Props: `count`, `activeIndex`, `activeClassName`, `inactiveClassName`, `className`.
+
+All three are exported from `@drakkar.software/seahorse/components`.
+
+---
+
 ## [0.5.1] — 2026-04-10
 
 ### Fixed
