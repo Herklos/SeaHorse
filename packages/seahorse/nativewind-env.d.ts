@@ -12,9 +12,41 @@ declare module "expo-sharing";
 declare module "expo-sqlite";
 declare module "expo-updates";
 declare module "@expo/html-elements";
-declare module "@gorhom/bottom-sheet";
+// react-native-svg: SvgProps must extend ViewProps so NativeWind's className
+// augmentation flows through to LucideProps (which extends SvgProps).
+declare module "react-native-svg" {
+  import type { ViewProps } from "react-native";
+  import type { ComponentType } from "react";
+  export interface SvgProps extends ViewProps {
+    color?: string;
+    fill?: string;
+    stroke?: string;
+    strokeWidth?: number | string;
+    strokeLinecap?: "butt" | "round" | "square";
+    strokeLinejoin?: "miter" | "round" | "bevel";
+    width?: number | string;
+    height?: number | string;
+    viewBox?: string;
+    d?: string;
+  }
+  export const Svg: ComponentType<SvgProps>;
+  export const Path: ComponentType<SvgProps>;
+}
+
+// @gorhom/bottom-sheet: extends Component<any> so it works as JSX and as a
+// type in useRef<BottomSheetModal>.
+declare module "@gorhom/bottom-sheet" {
+  import type { Component, ComponentType } from "react";
+  import type { ViewProps } from "react-native";
+  export class BottomSheetModal extends Component<any> {
+    present(): void;
+    dismiss(): void;
+  }
+  export const BottomSheetView: ComponentType<ViewProps & { className?: string }>;
+  export const BottomSheetBackdrop: ComponentType<any>;
+}
+
 declare module "@react-native-async-storage/async-storage";
-declare module "react-native-svg";
 declare module "sonner";
 declare module "sonner-native";
 
