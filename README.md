@@ -162,7 +162,9 @@ In your app's `global.css`, import the SeaHorse theme **before** your own brand 
 
 > Token values are **RGB triplets** (no `rgb()` wrapper) so Tailwind's opacity modifiers (`bg-primary-500/50`) work correctly.
 
-Add `@source` directives pointing at your app files so Tailwind scans for class names.
+> The `tailwind-theme` import also includes `@source inline(...)` declarations for all Tailwind utility classes used internally by SeaHorse (Avatar backgrounds, Button variants, etc.). No additional `@source` pointing at SeaHorse's `dist/` is needed.
+
+Add `@source` directives pointing at your own app files so Tailwind scans for class names:
 
 ---
 

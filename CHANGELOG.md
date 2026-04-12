@@ -2,6 +2,14 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.7.3] — 2026-04-12
+
+### Fixed
+
+- **`tailwind-theme`** — added `@source inline(...)` directives for all Tailwind utility classes used internally by SeaHorse primitives (`bg-*`, `border-*`, `text-*` color variants). Apps that import `@drakkar.software/seahorse/tailwind-theme` now automatically get all required classes generated without needing to add a separate `@source` pointing at SeaHorse's `dist/` directory. Previously, Avatar backgrounds and other component colors could be invisible if the consuming app didn't reference those exact classes in its own source.
+
+---
+
 ## [0.7.2] — 2026-04-11
 
 ### Added
