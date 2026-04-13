@@ -2,6 +2,14 @@
 
 All notable changes to `@drakkar.software/seahorse` will be documented here.
 
+## [0.7.6] — 2026-04-13
+
+### Changed
+
+- **`FlashList`** — `recycleItems` is now a configurable prop in `FlashListProps` (default `false`). Previously hard-coded to `true`, then removed entirely; consumers can now opt in explicitly.
+
+---
+
 ## [0.7.3] — 2026-04-12
 
 ### Fixed
