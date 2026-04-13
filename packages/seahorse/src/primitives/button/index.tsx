@@ -1,6 +1,8 @@
 'use client'
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useMemo } from 'react'
+import { Platform } from 'react-native'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native-css/components'
+import { styled } from 'react-native-css'
 import { cn } from '../../utils/cn'
 
 // ---------------------------------------------------------------------------
@@ -305,13 +307,22 @@ interface ButtonIconProps {
 }
 
 const ButtonIcon = React.forwardRef<any, ButtonIconProps>(
-  ({ className, as: Icon, size: sizeProp, height, width, ...props }, ref) => {
+  ({ className, as: IconComponent, size: sizeProp, height, width, ...props }, ref) => {
     const { action, variant, size: parentSize } = useContext(ButtonContext)
+
+    // On native, NativeWind text-* classes don't propagate to SVG `color` prop.
+    // Use styled() with nativeStyleToProp to bridge CSS color → Lucide color prop.
+    const NativeAwareIcon = useMemo(() => {
+      if (Platform.OS === 'web') return IconComponent
+      return styled(IconComponent as React.ComponentType<any>, {
+        className: { target: false, nativeStyleToProp: { color: 'color' } },
+      })
+    }, [IconComponent])
 
     // Explicit numeric size — skip parent variant sizing
     if (typeof sizeProp === 'number') {
       return (
-        <Icon
+        <NativeAwareIcon
           ref={ref}
           {...props}
           className={cn(buttonIconBase, className)}
@@ -324,7 +335,7 @@ const ButtonIcon = React.forwardRef<any, ButtonIconProps>(
     // Explicit height/width without size — skip parent variant sizing
     if ((height !== undefined || width !== undefined) && sizeProp === undefined) {
       return (
-        <Icon
+        <NativeAwareIcon
           ref={ref}
           {...props}
           className={cn(buttonIconBase, className)}
@@ -339,7 +350,7 @@ const ButtonIcon = React.forwardRef<any, ButtonIconProps>(
       : buttonIconNumericSizeMap[parentSize]
 
     return (
-      <Icon
+      <NativeAwareIcon
         ref={ref}
         {...props}
         size={numericSize}

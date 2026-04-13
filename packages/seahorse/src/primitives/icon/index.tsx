@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { Platform } from 'react-native'
+import { styled } from 'react-native-css'
 import { cn } from '../../utils/cn'
 
 const sizeMap: Record<string, number> = {
@@ -29,14 +31,23 @@ type IconProps = {
 
 const Icon = React.forwardRef<unknown, IconProps>(
   ({ as: IconComponent, size = 'md', className, color, ...props }, ref) => {
-    if (!IconComponent) return null
-
     const numericSize = typeof size === 'number' ? size : sizeMap[size as string] ?? 18
     const sizeClass = typeof size === 'string' ? sizeClasses[size] : undefined
-    const AnyIcon = IconComponent as React.ComponentType<any>
+
+    // On native, NativeWind text-* classes don't propagate to SVG `color` prop.
+    // Use styled() with nativeStyleToProp to bridge CSS color → Lucide color prop.
+    const NativeAwareIcon = useMemo(() => {
+      if (!IconComponent) return null
+      if (Platform.OS === 'web') return IconComponent as React.ComponentType<any>
+      return styled(IconComponent as React.ComponentType<any>, {
+        className: { target: false, nativeStyleToProp: { color: 'color' } },
+      })
+    }, [IconComponent])
+
+    if (!NativeAwareIcon) return null
 
     return (
-      <AnyIcon
+      <NativeAwareIcon
         ref={ref}
         size={numericSize}
         color={color}
